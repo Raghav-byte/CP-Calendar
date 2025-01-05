@@ -1,6 +1,5 @@
 package com.CP.Calendar.Service;
 
-import com.CP.Calendar.Model.CodeForces.CodeforcesResponse;
 import com.CP.Calendar.Model.CodeForces.Leetcode.ResponseClass;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -19,41 +18,11 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class ServiceInvoker {
 
-    // In-memory cache for storing the API response
     private final Map<String, ResponseClass> cache = new ConcurrentHashMap<>();
 
     @Autowired
     RestTemplate restTemplate;
 
-    // https://codeforces.com/apiHelp/objects
-    public CodeforcesResponse callCfContest() throws IOException {
-        // API URL
-        String url = "https://codeforces.com/api/contest.list";
-
-        // Build the URI with query parameters
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
-                .queryParam("gym", "false");
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<String> entity = new HttpEntity<>(null, headers);
-
-        ResponseEntity<String> response = restTemplate.exchange(
-                builder.toUriString(),
-                HttpMethod.GET,
-                entity,
-                String.class
-        );
-        // Parse the response body to extract unfinished contests
-        String responseBody = response.getBody();
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
-
-        CodeforcesResponse contest = objectMapper.readValue(responseBody, CodeforcesResponse.class);
-        return contest;
-    }
 
     //https://clist.by/api/v4/doc/#!/account/account_list
 
@@ -62,10 +31,10 @@ public class ServiceInvoker {
         cache.clear();
         System.out.println("HITTING EXTERNAL API AT " + LocalTime.now());
 
-        // API URL
+
         String url = "https://clist.by/api/v4/contest/";
 
-        // Build the URI with query parameters
+
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("limit", "1000").
                 queryParam("total_count","true").
@@ -88,7 +57,7 @@ public class ServiceInvoker {
                 entity,
                 String.class
         );
-        // Parse the response body to extract unfinished contests
+
         String responseBody = response.getBody();
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -96,12 +65,11 @@ public class ServiceInvoker {
 
         ResponseClass contest = objectMapper.readValue(responseBody, ResponseClass.class);
         cache.put("apiData", contest);
-//        return contest;
     }
 
     public Object getCachedData() {
         ResponseClass res = cache.get("apiData");
-        return res.getContestObjects();
+        return res.getObjects();
     }
 
 }

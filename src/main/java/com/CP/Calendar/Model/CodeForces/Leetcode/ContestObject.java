@@ -3,10 +3,12 @@ package com.CP.Calendar.Model.CodeForces.Leetcode;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -50,109 +52,6 @@ public class ContestObject {
 
     @JsonProperty("start")
     private String start;
-        // Getters and Setters
-        public Integer getDuration() {
-            return duration;
-        }
 
-        public void setDuration(Integer duration) {
-            this.duration = duration;
-        }
-
-        public String getEnd() {
-            return end;
-        }
-
-        public void setEnd(String end) {
-            this.end = end;
-        }
-
-        public String getEvent() {
-            return event;
-        }
-
-        public void setEvent(String event) {
-            this.event = event;
-        }
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public String getHref() {
-            return href;
-        }
-
-        public void setHref(String href) {
-            this.href = href;
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public Integer getNProblems() {
-            return nProblems;
-        }
-
-        public void setNProblems(Integer nProblems) {
-            this.nProblems = nProblems;
-        }
-
-        public Integer getNStatistics() {
-            return nStatistics;
-        }
-
-        public void setNStatistics(Integer nStatistics) {
-            this.nStatistics = nStatistics;
-        }
-
-        public String getParsedAt() {
-            return parsedAt;
-        }
-
-        public void setParsedAt(String parsedAt) {
-            this.parsedAt = parsedAt;
-        }
-
-        public String getProblems() {
-            return problems;
-        }
-
-        public void setProblems(String problems) {
-            this.problems = problems;
-        }
-
-        public String getResource() {
-            return resource;
-        }
-
-        public void setResource(String resource) {
-            this.resource = resource;
-        }
-
-        public Integer getResourceId() {
-            return resourceId;
-        }
-
-        public void setResourceId(Integer resourceId) {
-            this.resourceId = resourceId;
-        }
-
-        public String getStart() {
-            return start;
-        }
-
-        public void setStart(String start) {
-            this.start = start;
-        }
     }
 
