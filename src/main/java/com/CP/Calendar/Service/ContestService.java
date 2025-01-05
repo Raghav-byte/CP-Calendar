@@ -16,31 +16,26 @@ public class ContestService {
     @Autowired
     ServiceInvoker invoker;
 
-
     public List<ContestObject> getContestData(FilterRequest request) {
         List<ContestObject> responseList = new ArrayList<>();
         List<ContestObject> contestData = invoker.getCachedData();
-
         LocalDate todayDate = LocalDate.now();
 
-        if (!contestData.isEmpty()){
-
-            if (request.isToday()){
-                responseList = contestData.stream().filter(contest->contest.getContestStartDate().isEqual(todayDate)).collect(Collectors.toList());
-            }else {
-                responseList = contestData.stream().filter(contest->!contest.getContestStartDate().isEqual(todayDate)).collect(Collectors.toList());
+        if (!contestData.isEmpty()) {
+            if (request.isToday()) {
+                responseList = contestData.stream().filter(contest -> contest.getContestStartDate().isEqual(todayDate)).collect(Collectors.toList());
+            } else {
+                responseList = contestData.stream().filter(contest -> !contest.getContestStartDate().isEqual(todayDate)).collect(Collectors.toList());
             }
 
-            if (!request.getPlatformName().isEmpty()){
+            if (!request.getPlatformName().isEmpty()) {
                 responseList = responseList.stream()
                         .filter(contest -> request.getPlatformName().stream()
                                 .anyMatch(platform -> contest.getHost().toLowerCase().contains(platform)))
                         .collect(Collectors.toList());
             }
-
-
+        }
         return responseList;
     }
-        return null;
-    }
+
 }

@@ -13,7 +13,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Meta {
+public class Meta {
     @JsonProperty("estimated_count")
     private Integer estimatedCount;
 
