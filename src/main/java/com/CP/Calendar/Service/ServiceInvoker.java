@@ -1,5 +1,6 @@
 package com.CP.Calendar.Service;
 
+import com.CP.Calendar.Model.CodeForces.Leetcode.ContestObject;
 import com.CP.Calendar.Model.CodeForces.Leetcode.ResponseClass;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -12,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -67,7 +69,7 @@ public class ServiceInvoker {
         cache.put("apiData", contest);
     }
 
-    public Object getCachedData() {
+    public List<ContestObject> getCachedData() {
         ResponseClass res = cache.get("apiData");
         return res.getObjects();
     }
