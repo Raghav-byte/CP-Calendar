@@ -62,6 +62,8 @@ public class ContestObject {
     private LocalDate contestEndDate;
     private LocalTime contestEndTime;
 
+    private String relativeTime;
+    
     // Jackson calls the setter methods for each property during deserialization.
     public void setStart(String start) {
         this.start = start;
@@ -69,6 +71,7 @@ public class ContestObject {
             LocalDateTime dateTime = LocalDateTime.parse(start, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
             this.contestStartDate = dateTime.toLocalDate();
             this.contestStartTime = dateTime.toLocalTime();
+            this.relativeTime = Utils.getRelativeTime(this.contestStartDate, this.contestStartTime);
         }
     }
 
